@@ -10,15 +10,15 @@ manifest:
     - name: zmk
       repo-path: app
       revision: main
-    - name: modules/zephyr
+    - name: zephyr
       repo-path: modules/zephyr
       revision: v3.5.0
-    - name: modules/hal/nordic
+    - name: hal_nordic
       repo-path: modules/hal/nordic
       revision: main
-    - name: modules/hal/nordic/nrfx
+    - name: nrfx
       repo-path: modules/hal/nordic/nrfx
       revision: main
-    - name: modules/hal/nordic/nrfxlib
+    - name: nrfxlib
       repo-path: modules/hal/nordic/nrfxlib
       revision: main
