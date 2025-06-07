@@ -1,7 +1,6 @@
-# west.yml (în rădăcina proiectului)
 manifest:
-  self:
-    path: .
+  defaults:
+    remote: zmk
   remotes:
     - name: zmk
       url-base: https://github.com/zmkfirmware
@@ -11,15 +10,20 @@ manifest:
     - name: zmk
       repo-path: app
       revision: main
+    - name: modules/zephyr
+      repo-path: modules/zephyr
+      revision: v3.5.0
+    - name: modules/hal/nordic
+      repo-path: modules/hal/nordic
+      revision: main
     - name: modules/hal/nordic/nrfx
       repo-path: modules/hal/nordic/nrfx
       revision: main
     - name: modules/hal/nordic/nrfxlib
       repo-path: modules/hal/nordic/nrfxlib
       revision: main
-    - name: modules/hal/nordic
-      repo-path: modules/hal/nordic
-      revision: main
-    - name: zephyr
-      repo-path: modules/zephyr
-      revision: v3.5.0
+  include:
+    - board: nice_nano_v2
+      shield: split_left
+    - board: nice_nano_v2
+      shield: split_right
