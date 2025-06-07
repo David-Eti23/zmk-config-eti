@@ -7,10 +7,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install deps
+      - name: Install system dependencies
         run: |
-          sudo apt update
-          sudo apt install -y cmake ninja-build dtc gcc-arm-none-eabi python3-pip
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends \
+            git zip \
+            cmake ninja-build gperf ccache dfu-util device-tree-compiler \
+            gcc-arm-none-eabi \
+            python3-pip python3-setuptools python3-distutils
+
 
       - name: Install west
         run: |
