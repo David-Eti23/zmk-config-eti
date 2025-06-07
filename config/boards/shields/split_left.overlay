@@ -1,8 +1,9 @@
-// split_left.overlay
-/ {
+/* config/boards/shields/split_left.overlay */
+
+ / {
     chosen {
-        zmk,kscan            = &kscan0;
-        zmk,matrix-transform = &left_transform;
+        zmk,kscan             = &kscan0;
+        zmk,matrix-transform  = &matrix_transform;
     };
 
     kscan0: kscan {
@@ -14,7 +15,7 @@
            R2 = P1.00 (D6)
            R3 = P0.11 (D7)
            R4 = P1.04 (D8)
-           R5 = P1.06 (D9) (thumb-row) */
+           R5 = P1.06 (D9) (thumb row) */
         row-gpios = <
             &gpio0 22 GPIO_ACTIVE_LOW   /* R0 = D4  */
             &gpio0 24 GPIO_ACTIVE_LOW   /* R1 = D5  */
@@ -24,7 +25,7 @@
             &gpio1  6 GPIO_ACTIVE_LOW   /* R5 = D9  */
         >;
 
-        /* COLS, stânga → dreapta:
+        /* COLS, stânga→dreapta:
            C0 = P1.11 (D14)
            C1 = P1.13 (D15)
            C2 = P1.15 (D18)
@@ -40,32 +41,32 @@
             &gpio0 31 GPIO_ACTIVE_LOW   /* C5 = D21 */
         >;
 
-        diode-direction      = COL2ROW;
-        debounce-press-ms    = <1>;
-        debounce-release-ms  = <5>;
+        diode-direction     = COL2ROW;
+        debounce-press-ms   = <1>;
+        debounce-release-ms = <5>;
     };
 
-    left_transform: matrix_transform {
+    matrix_transform: matrix-transform {
         compatible = "zmk,matrix-transform";
         rows    = <6>;
         columns = <6>;
 
         /*
-          Layout fizic (6×6), cu R5,C0 și R5,C1 fiind NC (no-connect):
+         Poziționarea fizică 6×6, cu NC pe R5,C0 și R5,C1:
 
-               C0     C1     C2     C3     C4     C5
-               │      │      │      │      │      │
-          R0 — ( ~ )— ( 1 )— ( 2 )— ( 3 )— ( 4 )— ( 5 )
-               │      │      │      │      │      │
-          R1 — (Tab)— ( Q )— ( W )— ( E )— ( R )— ( T )
-               │      │      │      │      │      │
-          R2 — (Caps)-( A )— ( S )— ( D )— ( F )— ( G )
-               │      │      │      │      │      │
-          R3 — (LSFT)-( Z )— ( X )— ( C )— ( V )— ( B )
-               │      │      │      │      │      │
-          R4 — (Ctrl)-(Alt)-(← )— (→ )— (Spc)— (Esc)
-               │      │      │      │      │      │
-          R5 —  NC   —  NC   — (LGUI)—(NAV)—(SYM)—(Esc)
+             C0     C1     C2     C3     C4     C5
+             │      │      │      │      │      │
+        R0 — ( ~ )— ( 1 )— ( 2 )— ( 3 )— ( 4 )— ( 5 )
+             │      │      │      │      │      │
+        R1 — (Tab)— ( Q )— ( W )— ( E )— ( R )— ( T )
+             │      │      │      │      │      │
+        R2 — (Caps)-( A )— ( S )— ( D )— ( F )— ( G )
+             │      │      │      │      │      │
+        R3 — (LSFT)-( Z )— ( X )— ( C )— ( V )— ( B )
+             │      │      │      │      │      │
+        R4 — (Ctrl)-(Alt)-(← )— (→ )— (Spc)— (Esc)
+             │      │      │      │      │      │
+        R5 —  NC   —  NC   — (LGUI)—(NAV)—(SYM)—(Esc)
         */
 
         map = <

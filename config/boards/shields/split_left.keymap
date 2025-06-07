@@ -1,27 +1,28 @@
-#include <dt-bindings/zmk/bt.h>  /* doar dacă folosești buton pairing */
+/* config/boards/shields/split_left.keymap */
 
- / {
+#include <dt-bindings/zmk/bt.h>
+
+/ {
     keymap {
         compatible = "zmk,keymap";
         layers = <&base &nav &sym>;
 
         base {
             bindings = <
-            /* ROW 0 (R0=C0…C5) */
-            &kp GRAVE  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5
-            /* ROW 1 (R1=C0…C5) */
-            &kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T
-            /* ROW 2 (R2=C0…C5) */
-            &kp CAPS   &kp A      &kp S      &kp D      &kp F      &kp G
-            /* ROW 3 (R3=C0…C5) */
-            &kp LSFT   &kp Z      &kp X      &kp C      &kp V      &kp B
-            /* ROW 4 (R4=C0…C5) */
-            &kp LCTRL  &kp LALT   &kp LEFT   &kp RIGHT  &kp SPACE  &kp ESC
-            /* ROW 5 (thumb, R5=C0…C5) */
-            &none      &none      &kp LGUI   &mo NAV    &mo SYM    &kp ESC
-            /*      ↑            ↑         ↑         ↑          ↑         ↑
-                     R5,C0=NC  R5,C1=NC  R5,C2=App  R5,C3=LAY  R5,C4=CODE  R5,C5=ESC 
-            */
+                /* R0 (D4–D21: C0…C5) */
+                &kp GRAVE  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5
+                /* R1 */
+                &kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T
+                /* R2 */
+                &kp CAPS   &kp A      &kp S      &kp D      &kp F      &kp G
+                /* R3 */
+                &kp LSFT   &kp Z      &kp X      &kp C      &kp V      &kp B
+                /* R4 */
+                &kp LCTRL  &kp LALT   &kp LEFT   &kp RIGHT  &kp SPACE  &kp ESC
+                /* R5 (thumb, C0–C5) */
+                &none      &none      &kp LGUI   &mo NAV    &mo SYM    &kp ESC
+                /*           ↑         ↑         ↑         ↑         ↑
+                            C0=NC     C1=NC     C2=App     C3=Nav     C4=Sym     C5=Esc */
             >;
         };
 
