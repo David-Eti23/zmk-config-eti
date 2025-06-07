@@ -1,6 +1,68 @@
-name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
+# .github/workflows/build.yaml
+name: ZMK Split Keyboard CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          cmake ninja-build gperf ccache dfu-util device-tree-compiler \
+          gcc-arm-none-eabi python3-pip python3-setuptools
+
+    - name: Install West
+      run: |
+        python3 -m pip install --user west
+        echo "::add-path::$HOME/.local/bin"
+
+    - name: Initialize and update ZMK (West)
+      run: |
+        cd app
+        west init -l .
+        west update
+
+    - name: Source Zephyr environment
+      run: |
+        cd app
+        source scripts/zephyr-env.sh
+
+    - name: Build LEFT half (central)
+      run: |
+        cd app
+        source scripts/zephyr-env.sh
+        west build -b nice_nano_v2 -d ../build/left \
+          -- -DSHIELD=split_left -DZMK_SPLIT_ROLE=central
+
+    - name: Build RIGHT half (peripheral)
+      run: |
+        cd app
+        source scripts/zephyr-env.sh
+        west build -b nice_nano_v2 -d ../build/right \
+          -- -DSHIELD=split_right -DZMK_SPLIT_ROLE=peripheral
+
+    - name: Upload LEFT UF2
+      uses: actions/upload-artifact@v3
+      with:
+        name: left-half-uf2
+        path: build/left/zephyr/zmk.uf2
+
+    - name: Upload RIGHT UF2
+      uses: actions/upload-artifact@v3
+      with:
+        name: right-half-uf2
+        path: build/right/zephyr/zmk.uf2
