@@ -1,15 +1,19 @@
-# west.yml (în rădăcina proiectului)
+# west.yml
 manifest:
   self:
     path: .
   remotes:
     - name: zmk
       url-base: https://github.com/zmkfirmware
-    - name: zephyrproject
-      url-base: https://github.com/zephyrproject-rtos
   projects:
     - name: zmk
       repo-path: app
+      revision: main
+    - name: zephyr
+      repo-path: modules/zephyr
+      revision: v3.5.0
+    - name: modules/hal/nordic
+      repo-path: modules/hal/nordic
       revision: main
     - name: modules/hal/nordic/nrfx
       repo-path: modules/hal/nordic/nrfx
@@ -17,9 +21,3 @@ manifest:
     - name: modules/hal/nordic/nrfxlib
       repo-path: modules/hal/nordic/nrfxlib
       revision: main
-    - name: modules/hal/nordic
-      repo-path: modules/hal/nordic
-      revision: main
-    - name: zephyr
-      repo-path: modules/zephyr
-      revision: v3.5.0
