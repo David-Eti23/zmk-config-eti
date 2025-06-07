@@ -1,20 +1,28 @@
-# west.yml (in repo root)
+# config/west.yml
 manifest:
+  defaults:
+    remote: zmk
   remotes:
     - name: zmk
       url-base: https://github.com/zmkfirmware
     - name: zephyrproject
       url-base: https://github.com/zephyrproject-rtos
+
   projects:
+    # 1) ZMK firmware (imports its own sub‐manifest app/west.yml)
     - name: zmk
       remote: zmk
       repo-path: app
       revision: main
       import: app/west.yml
+
+    # 2) Zephyr RTOS
     - name: zephyr
       remote: zephyrproject
       repo-path: modules/zephyr
       revision: v3.5.0
+
+    # 3) Nordic HAL modules
     - name: hal_nordic
       remote: zephyrproject
       repo-path: modules/hal/nordic
