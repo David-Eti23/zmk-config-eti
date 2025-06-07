@@ -22,8 +22,3 @@ manifest:
     - name: modules/hal/nordic/nrfxlib
       repo-path: modules/hal/nordic/nrfxlib
       revision: main
-  include:
-    - board: nice_nano_v2
-      shield: split_left
-    - board: nice_nano_v2
-      shield: split_right
