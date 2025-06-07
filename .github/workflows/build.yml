@@ -1,27 +1,11 @@
 name: Build ZMK firmware
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
-      # Path to your config directory (containing boards/shields/…)
-      config_path: config
-
-      # Which Zephyr board(s) to build
-      boards: nice_nano_v2
-
-      # Which shields / overlays you have under config/boards/shields
-      shields: split_left,split_right
-
-      # For each shield above, which split-role to pass?
-      # The first entry goes with split_left, the second with split_right
-      roles: central,peripheral
-
-      # (Optional) How to name the resulting .uf2 files:
-      artifact_names: left-half,right-half
+      config_path: config         # where your split_left.overlay + split_right.overlay live
+      # build_matrix_path: build.yaml  # optional, defaults to "build.yaml"
+      # archive_name: firmware         # optional
+      # fallback_binary: bin            # optional, defaults to "bin"

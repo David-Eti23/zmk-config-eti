@@ -19,7 +19,14 @@
 #
 ---
 include:
+  # left half: pass -DSHIELD=split_left and split role = central
   - board: nice_nano_v2
-    shield: split_left           
+    shield: split_left
+    cmake-args: "-DZMK_SPLIT_ROLE=central"
+    artifact-name: left-half
+
+  # right half: pass -DSHIELD=split_right and split role = peripheral
   - board: nice_nano_v2
     shield: split_right
+    cmake-args: "-DZMK_SPLIT_ROLE=peripheral"
+    artifact-name: right-half
