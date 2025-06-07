@@ -14,12 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # jumătatea stângă (master)
           - board: nice_nano_v2
             shield: split_left
             role: central
             artifact: left-half
-          # jumătatea dreaptă (peripheral)
           - board: nice_nano_v2
             shield: split_right
             role: peripheral
@@ -37,8 +35,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y --no-install-recommends \
-          cmake ninja-build device-tree-compiler \
-          gcc-arm-none-eabi python3-pip python3-setuptools python3-distutils
+          cmake \
+          ninja-build \
+          device-tree-compiler \
+          gcc-arm-none-eabi \
+          python3-pip \
+          python3-setuptools
 
     - name: Install West
       run: |

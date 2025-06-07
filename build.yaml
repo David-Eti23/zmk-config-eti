@@ -20,8 +20,6 @@
 ---
 include:
   - board: nice_nano_v2
-    shield: split_left
-    cmake-args: ""             # rolul se va lua din workflow (central)
+    shield: split_left           
   - board: nice_nano_v2
     shield: split_right
-    cmake-args: ""
