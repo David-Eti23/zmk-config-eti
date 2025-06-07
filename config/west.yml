@@ -1,13 +1,25 @@
+# west.yml (în rădăcina proiectului)
 manifest:
+  self:
+    path: .
   remotes:
-    - name: zmkfirmware
+    - name: zmk
       url-base: https://github.com/zmkfirmware
-    # Additional modules containing boards/shields/custom code can be listed here as well
-    # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
+    - name: zephyrproject
+      url-base: https://github.com/zephyrproject-rtos
   projects:
     - name: zmk
-      remote: zmkfirmware
+      repo-path: app
       revision: main
-      import: app/west.yml
-  self:
-    path: config
+    - name: modules/hal/nordic/nrfx
+      repo-path: modules/hal/nordic/nrfx
+      revision: main
+    - name: modules/hal/nordic/nrfxlib
+      repo-path: modules/hal/nordic/nrfxlib
+      revision: main
+    - name: modules/hal/nordic
+      repo-path: modules/hal/nordic
+      revision: main
+    - name: zephyr
+      repo-path: modules/zephyr
+      revision: v3.5.0

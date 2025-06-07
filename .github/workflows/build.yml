@@ -1,6 +1,53 @@
-name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
-
+name: ZMK Split Keyboard CI
+on: [push,pull_request]
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install deps
+        run: |
+          sudo apt update
+          sudo apt install -y cmake ninja-build dtc gcc-arm-none-eabi python3-pip
+
+      - name: Install west
+        run: |
+          python3 -m pip install --user west
+          echo "::add-path::$HOME/.local/bin"
+
+      - name: Init & update ZMK
+        run: |
+          cd app
+          west init -l .
+          west update
+
+      - name: Source Zephyr env
+        run: |
+          cd app
+          source scripts/zephyr-env.sh
+
+      - name: Build left
+        run: |
+          cd app
+          source scripts/zephyr-env.sh
+          west build -b nice_nano_v2 -d ../build/left \
+            -- -DSHIELD=split_left -DZMK_SPLIT_ROLE=central
+
+      - name: Build right
+        run: |
+          cd app
+          source scripts/zephyr-env.sh
+          west build -b nice_nano_v2 -d ../build/right \
+            -- -DSHIELD=split_right -DZMK_SPLIT_ROLE=peripheral
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: left-uf2
+          path: build/left/zephyr/zmk.uf2
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: right-uf2
+          path: build/right/zephyr/zmk.uf2

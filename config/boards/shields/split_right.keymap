@@ -1,27 +1,18 @@
-/* split_right.keymap */
-
 #include <dt-bindings/zmk/bt.h>
+/ {
+  keymap {
+    compatible = "zmk,keymap";
+    layers = <&base>;
 
- / {
-    keymap {
-        compatible = "zmk,keymap";
-        layers = <&base>;
-
-        base {
-            bindings = <
-                /* R0 = ^ & * ( ) + = */
-                &kp CIRCUMFLEX  &kp AMPERSAND  &kp ASTERISK  &kp LPAREN  &kp RPAREN  &kp EQUAL
-                /* R1 = 6 7 8 9 0 - */
-                &kp N6          &kp N7         &kp N8        &kp N9       &kp N0       &kp MINUS
-                /* R2 = Y U I O P [ */
-                &kp Y           &kp U          &kp I         &kp O        &kp P        &kp LBKT
-                /* R3 = H J K L ; ] */
-                &kp H           &kp J          &kp K         &kp L        &kp SEMI     &kp RBKT
-                /* R4 = N M , . / */  
-                &kp N           &kp M          &kp COMMA     &kp DOT      &kp SLASH    &kp RBKT /* if slash and bracket share? adjust */
-                /* R5 thumb cluster */
-                &kp BSPC       &kp ENTER      &kp APP       &kp LGUI     &kp C_VOL_UP  &kp C_VOL_DN
-            >;
-        };
+    base {
+      bindings = <
+        /* R0 */ &kp CIRCUMFLEX &kp AMPERSAND &kp ASTERISK &kp LPAREN &kp RPAREN &kp EQUAL
+        /* R1 */ &kp N6         &kp N7       &kp N8       &kp N9     &kp N0     &kp MINUS
+        /* R2 */ &kp Y          &kp U        &kp I        &kp O      &kp P      &kp LBKT
+        /* R3 */ &kp H          &kp J        &kp K        &kp L      &kp SEMI   &kp RBKT
+        /* R4 */ &kp N          &kp M        &kp COMMA    &kp DOT    &kp SLASH  &kp RBKT
+        /* R5 */ &kp BSPC       &kp ENTER    &kp APP      &kp LGUI   &kp C_VOL_UP &kp C_VOL_DN
+      >;
     };
+  };
 };
